@@ -1,0 +1,7 @@
+{
+	"name": "synapse-ws-custstgacct--gerencia-azpaciencareetl",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/45c24151-a29d-4ca6-b32d-151992786746/resourceGroups/RGETLAZURE/providers/Microsoft.Storage/storageAccounts/azpaciencareetl",
+		"groupId": "dfs"
+	}
+}
