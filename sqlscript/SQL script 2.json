@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.objects O JOIN sys.schemas S ON O.schema_id = S.schema_id WHERE O.NAME = 'DIM_TIEMPO' AND O.TYPE = 'U' AND S.NAME = 'dbo')\nCREATE TABLE dbo.DIM_TIEMPO\n\t(\n\t [IdDIMTIEMPO] int,\n\t [Fecha] date,\n\t [Anio] int,\n\t [Mes] int,\n\t [NombreMes] nvarchar(4000),\n\t [Dia] int,\n\t [NombreDia] nvarchar(4000),\n\t [Semana] int,\n\t [Trimestre] int,\n\t [Semestre] int\n\t)\nWITH\n\t(\n\tDISTRIBUTION = ROUND_ROBIN,\n\t CLUSTERED COLUMNSTORE INDEX\n\t -- HEAP\n\t)\nGO\n\n--Uncomment the 4 lines below to create a stored procedure for data pipeline orchestration​\n--CREATE PROC bulk_load_DIM_TIEMPO\n--AS\n--BEGIN\nCOPY INTO dbo.DIM_TIEMPO\n(IdDIMTIEMPO 1, Fecha 2, Anio 3, Mes 4, NombreMes 5, Dia 6, NombreDia 7, Semana 8, Trimestre 9, Semestre 10)\nFROM 'https://azpaciencareetl.dfs.core.windows.net/datosprocesados/dw/DIM_TIEMPO.PARQUET'\nWITH\n(\n\tFILE_TYPE = 'PARQUET'\n\t,MAXERRORS = 0\n)\n--END\nGO\n\nSELECT TOP 100 * FROM dbo.DIM_TIEMPO\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "paciencare_dw",
+				"poolName": "paciencare_dw"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

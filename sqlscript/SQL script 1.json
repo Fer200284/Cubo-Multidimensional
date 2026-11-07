@@ -2,7 +2,7 @@
 	"name": "SQL script 1",
 	"properties": {
 		"content": {
-			"query": "CREATE TABLE dbo.DIM_TIEMPO\n(\n    IdDIMTIEMPO INT NOT NULL,\n    Fecha DATE NOT NULL,\n    Anio INT NOT NULL,\n    Mes INT NOT NULL,\n    NombreMes VARCHAR(20) NOT NULL,\n    Dia INT NOT NULL,\n    NombreDia VARCHAR(20) NOT NULL,\n    Semana INT NOT NULL,\n    Trimestre INT NOT NULL,\n    Semestre INT NOT NULL\n);\n\nselect * FROM  dbo.DIM_TIEMPO\n",
+			"query": "CREATE TABLE dbo.DIM_TIEMPO\n(\n    IdDIMTIEMPO INT NOT NULL,\n    Fecha DATE NOT NULL,\n    Anio INT NOT NULL,\n    Mes INT NOT NULL,\n    NombreMes VARCHAR(20) NOT NULL,\n    Dia INT NOT NULL,\n    NombreDia VARCHAR(20) NOT NULL,\n    Semana INT NOT NULL,\n    Trimestre INT NOT NULL,\n    Semestre INT NOT NULL\n);\n\n",
 			"metadata": {
 				"language": "sql"
 			},
