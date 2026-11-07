@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 14",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.objects O JOIN sys.schemas S ON O.schema_id = S.schema_id WHERE O.NAME = '[FACT_RESULTADOS_EXAMENES]' AND O.TYPE = 'U' AND S.NAME = ' [dbo]')\nCREATE TABLE  [dbo].[FACT_RESULTADOS_EXAMENES]\n\t(\n\t [ID_FACT_RE] int,\n\t [ID_SOLICITUD_EXAMEN_OLTP] bigint,\n\t [IdDIMTIEMPO] int,\n\t [ID_DIMPACIENTE] int,\n\t [ID_DIMMEDICO] int,\n\t [ID_DIMEXAMENES] int,\n\t [VALOR_RESULTADO] numeric(10,2)\n\t)\nWITH\n\t(\n\tDISTRIBUTION = ROUND_ROBIN,\n\t CLUSTERED COLUMNSTORE INDEX\n\t -- HEAP\n\t)\nGO\n\n--Uncomment the 4 lines below to create a stored procedure for data pipeline orchestration​\n--CREATE PROC bulk_load_[FACT_RESULTADOS_EXAMENES]\n--AS\n--BEGIN\nCOPY INTO  [dbo].[FACT_RESULTADOS_EXAMENES]\n(ID_FACT_RE 1, ID_SOLICITUD_EXAMEN_OLTP 2, IdDIMTIEMPO 3, ID_DIMPACIENTE 4, ID_DIMMEDICO 5, ID_DIMEXAMENES 6, VALOR_RESULTADO 7)\nFROM 'https://azpaciencareetl.dfs.core.windows.net/datosprocesados/dw/facr_resultados_examenes.parquet'\nWITH\n(\n\tFILE_TYPE = 'PARQUET'\n\t,MAXERRORS = 0\n)\n--END\nGO\n\nSELECT TOP 100 * FROM  [dbo].[FACT_RESULTADOS_EXAMENES]\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "paciencare_dw",
+				"poolName": "paciencare_dw"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

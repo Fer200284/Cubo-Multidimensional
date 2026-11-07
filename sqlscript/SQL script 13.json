@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 13",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.objects O JOIN sys.schemas S ON O.schema_id = S.schema_id WHERE O.NAME = '[FACT_AtencionMongo]' AND O.TYPE = 'U' AND S.NAME = '[dbo]')\nCREATE TABLE [dbo].[FACT_AtencionMongo]\n\t(\n\t [ID_FACT_MONGO] int,\n\t [ID_ATENCION_OLTP] bigint,\n\t [IdDIMTIEMPO] int,\n\t [ID_DIMPACIENTE] int,\n\t [ID_DIMMEDICO] int,\n\t [ID_DIMPATOLOGIA] int,\n\t [ASISTIO_VAL] bit,\n\t [DURACION_CONSULTA_MINUTOS] int,\n\t [TIEMPO_ESPERA_REAL_MINUTOS] int,\n\t [RECETO_MEDICAMENTO_FLAG] bit,\n\t [SOLICITO_EXAMEN_FLAG] bit\n\t)\nWITH\n\t(\n\tDISTRIBUTION = ROUND_ROBIN,\n\t CLUSTERED COLUMNSTORE INDEX\n\t -- HEAP\n\t)\nGO\n\n--Uncomment the 4 lines below to create a stored procedure for data pipeline orchestration​\n--CREATE PROC bulk_load_[FACT_AtencionMongo]\n--AS\n--BEGIN\nCOPY INTO [dbo].[FACT_AtencionMongo]\n(ID_FACT_MONGO 1, ID_ATENCION_OLTP 2, IdDIMTIEMPO 3, ID_DIMPACIENTE 4, ID_DIMMEDICO 5, ID_DIMPATOLOGIA 6, ASISTIO_VAL 7, DURACION_CONSULTA_MINUTOS 8, TIEMPO_ESPERA_REAL_MINUTOS 9, RECETO_MEDICAMENTO_FLAG 10, SOLICITO_EXAMEN_FLAG 11)\nFROM 'https://azpaciencareetl.dfs.core.windows.net/datosprocesados/dw/FACT_ATENCION_MONGODB.PARQUET'\nWITH\n(\n\tFILE_TYPE = 'PARQUET'\n\t,MAXERRORS = 0\n)\n--END\nGO\n\nSELECT TOP 100 * FROM [dbo].[FACT_AtencionMongo]\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "paciencare_dw",
+				"poolName": "paciencare_dw"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
