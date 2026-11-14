@@ -1,4 +1,4 @@
 {
 	"name": "default",
-	"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks"
+	"type": "Microsoft.DataFactory/factories/managedvirtualnetworks"
 }
