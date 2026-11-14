@@ -4,7 +4,7 @@
 		"privateLinkResourceId": "/subscriptions/45c24151-a29d-4ca6-b32d-151992786746/resourceGroups/RGETLAZURE/providers/Microsoft.Synapse/workspaces/gerencia",
 		"groupId": "sql",
 		"fqdns": [
-			"gerencia.9394cb39-de99-43c7-8c13-6b1dece40d6e.sql.azuresynapse.net"
+			"gerencia.d8f39be7-e65c-4e60-82db-2ac264d8bdf4.sql.azuresynapse.net"
 		]
 	}
 }
